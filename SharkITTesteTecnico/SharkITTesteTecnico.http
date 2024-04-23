@@ -1,0 +1,24 @@
+@url = http://localhost:5260/api
+
+GET {{url}}/users
+Accept: application/json
+
+###
+
+POST {{url}}/users
+Accept: application/json
+
+{
+  "UserName": "teste 3",
+  "Email": "teste@teste.com.br"
+}
+
+###
+
+PUT {{url}}/users/950d7d30-c6ec-4275-9d10-ab9dcda9a8fa
+Accept: application/json
+
+###
+
+DELETE {{url}}/users/950d7d30-c6ec-4275-9d10-ab9dcda9a8fa
+Accept: application/json
