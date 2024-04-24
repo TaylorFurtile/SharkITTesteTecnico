@@ -28,9 +28,10 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseDefaultDatabaseSeeders();
-    app.UseSwagger();
-    app.UseSwaggerUI();
 }
+
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.UseFastEndpoints(configuration => {
     configuration.Errors.UseProblemDetails();
