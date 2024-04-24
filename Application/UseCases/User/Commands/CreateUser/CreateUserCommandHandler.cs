@@ -10,8 +10,13 @@ public class CreateUserCommandHandler(IUserRepository userRepository)
 {
     public async Task<Guid> Handle(CreateUserCommand request, CancellationToken cancellationToken)
     {
+        var formattedRequest = request with
+        {
+            Email = request.Email?.ToLower()
+        };
+
         var validator = new CreateUserCommandValidator(userRepository);
-        var validationResult = await validator.ValidateAsync(request, cancellationToken);
+        var validationResult = await validator.ValidateAsync(formattedRequest, cancellationToken);
 
         if (validationResult.Errors.Count != 0)
         {
@@ -21,12 +26,14 @@ public class CreateUserCommandHandler(IUserRepository userRepository)
         Entities.User user = new()
         {
             Id = Guid.NewGuid(),
-            Email = request.Email!,
-            Username = request.Username!,
+            Email = formattedRequest.Email!,
+            Username = formattedRequest.Username!,
             CreatedAt = DateTime.UtcNow,
             UpdatedAt = DateTime.UtcNow,
         };
 
-        return await userRepository.Create(user);
+        await userRepository.Create(user);
+
+        return user.Id;
     }
 }

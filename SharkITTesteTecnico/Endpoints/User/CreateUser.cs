@@ -9,7 +9,6 @@ public class CreateUser(ISender sender) : Endpoint<CreateUserRequest, Guid>
     public override void Configure()
     {
         Post("/api/users");
-        DontThrowIfValidationFails();
         AllowAnonymous();
     }
 

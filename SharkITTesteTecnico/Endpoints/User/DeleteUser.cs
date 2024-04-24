@@ -9,7 +9,6 @@ public class DeleteUser(ISender sender) : Endpoint<DeleteUserRequest, Unit>
     public override void Configure()
     {
         Delete("/api/users/{id}");
-        DontThrowIfValidationFails();
         AllowAnonymous();
     }
 

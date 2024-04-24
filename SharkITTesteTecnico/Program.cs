@@ -32,7 +32,13 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseFastEndpoints(configuration => configuration.Errors.UseProblemDetails());
+app.UseFastEndpoints(configuration => {
+    configuration.Errors.UseProblemDetails();
+    configuration.Endpoints.Configurator = x =>
+    {
+        x.DontThrowIfValidationFails();
+    };
+});
 
 app.UseHttpsRedirection();
 

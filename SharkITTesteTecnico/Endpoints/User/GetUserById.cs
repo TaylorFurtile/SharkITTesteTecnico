@@ -10,7 +10,6 @@ public class GetUserById(ISender sender) : Endpoint<GetUserByIdRequest, Entities
     public override void Configure()
     {
         Get("api/users/{id}");
-        DontThrowIfValidationFails();
         AllowAnonymous();
     }
 
