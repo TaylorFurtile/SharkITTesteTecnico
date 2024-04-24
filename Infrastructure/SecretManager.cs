@@ -8,7 +8,7 @@ public class SecretManager(IConfiguration configuration) : ISecretManager
 {
     public string GetRequiredSecret(string key)
     {
-        string? secret = configuration[key];
+        string? secret = Environment.GetEnvironmentVariable("DEFAULTDB_CONNECTION_STRING") ?? configuration[key];
 
         ArgumentNullException.ThrowIfNull(secret, nameof(secret));
 
